@@ -1,0 +1,9 @@
+{% extends 'entries/base.html' %}
+
+{% block title %}
+Home - Diary
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'entries:add' %}">Add</a>
+{% endblock %}

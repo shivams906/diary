@@ -5,4 +5,9 @@ Add - Diary
 {% endblock %}
 
 {% block content %}
+<form method="post">
+    {{ form }}
+    <button type="submit">Add</button>
+    {% csrf_token %}
+</form>
 {% endblock %}

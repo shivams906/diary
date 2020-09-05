@@ -6,4 +6,14 @@ Home - Diary
 
 {% block content %}
 <a href="{% url 'entries:add' %}">Add</a>
+<ul>
+    {% for entry in entries %}
+    <li id='id_entry'>
+        {{ entry.text }}
+        Created at: {{ entry.created }}
+        Modified at: {{ entry.modified }}
+    </li>
+    {% endfor %}
+</ul>
+
 {% endblock %}

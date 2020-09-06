@@ -7,21 +7,37 @@ Home - Diary
 {% block content %}
 <a href="{% url 'entries:add' %}">Add</a>
 
-{% regroup entries by created.date as days_entry %}
+{% regroup entries by created.date.year as years_entry %}
 <ul>
-    {% for day in days_entry %}
+    {% for year_entry in years_entry %}
     <li>
-        <h3>{{ day.grouper }}</h3>
+        {{ year_entry.grouper }}
+        {% regroup year_entry.list by created.date.month as months_entry %}
+        <ul>
+            {% for month_entry in months_entry %}
+            <li>
+                {{ month_entry.grouper }}
+                {% regroup month_entry.list by created.date.day as days_entry %}
+                <ul>
+                    {% for day_entry in days_entry %}
+                    <li>
+                        {{ day_entry.grouper }}
+                        <ul>
+                            {% for entry in day_entry.list %}
+                            <li id='id-entry'>
+                                {{ entry.created.time }}
+                                <br>
+                                {{ entry.text|linebreaksbr }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
     </li>
-    <ul>
-        {% for entry in day.list %}
-        <li id='id-entry'>
-            {{ entry.created.time }}
-            <br>
-            {{ entry.text|linebreaksbr }}
-        </li>
-        {% endfor %}
-    </ul>
     {% endfor %}
 </ul>
 

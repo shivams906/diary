@@ -10,10 +10,12 @@ Home - Diary
 {% regroup entries by created.date as days_entry %}
 <ul>
     {% for day in days_entry %}
-    <li>{{ day.grouper }}</li>
+    <li>
+        <h3>{{ day.grouper }}</h3>
+    </li>
     <ul>
         {% for entry in day.list %}
-        <li id='id_entry'>
+        <li id='id-entry'>
             {{ entry.created.time }}
             <br>
             {{ entry.text|linebreaksbr }}

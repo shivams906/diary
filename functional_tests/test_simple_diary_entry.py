@@ -40,7 +40,7 @@ class HomePageTest(StaticLiveServerTestCase):
             )
         )
 
-        entries = wait_for(lambda: self.browser.find_elements_by_id("id_entry"))
+        entries = wait_for(lambda: self.browser.find_elements_by_id("id-entry"))
         self.assertIn("text", entries[0].text)
 
         # She enters another entry and it appears on top of it
@@ -53,7 +53,7 @@ class HomePageTest(StaticLiveServerTestCase):
                 self.browser.current_url, f"{self.live_server_url}/entries/"
             )
         )
-        entries = wait_for(lambda: self.browser.find_elements_by_id("id_entry"))
+        entries = wait_for(lambda: self.browser.find_elements_by_id("id-entry"))
         self.assertIn("text2", entries[0].text)
         self.assertIn("text", entries[1].text)
 

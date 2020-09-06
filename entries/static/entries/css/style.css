@@ -6,5 +6,7 @@ li#id-entry {
 
 ul {
   list-style: none; }
+  ul .box {
+    cursor: pointer; }
 
 /*# sourceMappingURL=style.css.map */

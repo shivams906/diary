@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Suite</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.11.1.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture">
+        <ul id="list-0-0">
+            <li>
+                <span class="box" id="box-1-0">Level 1</span>
+                <ul id="list-1-0">
+                    <li>
+                        <span class="box" id="box-2-0">Level 2</span>
+                        <ul id="list-2-0">
+                            <li>Hi, there</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="box" id="box-2-1">Level 2</span>
+                        <ul id="list-2-1">
+                            <li>Hi, there</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/qunit/qunit-2.11.1.js"></script>
+    <script src="../jquery-3.5.1.js"></script>
+    <script src="../list.js"></script>
+
+    <script>
+        QUnit.test("should toggle visibility of inner levels", function (assert) {
+            window.Entries.initialize();
+            assert.equal($('.box').siblings('ul').is(':visible'), true);
+            $('.box').click();
+            assert.equal($('.box').siblings('ul').is(':visible'), false);
+            $('.box').click();
+            assert.equal($('.box').siblings('ul').is(':visible'), true);
+        });
+
+        QUnit.test("should only toggle its own sibling list", function (assert) {
+            window.Entries.initialize();
+            assert.equal($('#list-1-0').is(':visible'), true);
+            assert.equal($('#list-2-0').is(':visible'), true);
+            assert.equal($('#list-2-1').is(':visible'), true);
+            $('#box-2-0').click();
+            assert.equal($('#list-1-0').is(':visible'), true);
+            assert.equal($('#list-2-0').is(':visible'), false);
+            assert.equal($('#list-2-1').is(':visible'), true);
+        })
+    </script>
+
+</body>
+
+</html>

@@ -7,4 +7,4 @@ class Entry(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ("-modified",)
+        ordering = ("-created",)

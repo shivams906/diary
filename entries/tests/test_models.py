@@ -1,6 +1,5 @@
 from django.test import TestCase
 from entries.models import Entry
-import time
 
 
 class EntryTest(TestCase):

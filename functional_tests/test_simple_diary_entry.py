@@ -30,7 +30,7 @@ class HomePageTest(StaticLiveServerTestCase):
         input_box = wait_for(lambda: self.browser.find_element_by_id("id_text"))
 
         # She enters an entry and clicks the add button
-        input_box.send_keys(10 * "text")
+        input_box.send_keys(10 * f'{10 * "text"}\n')
         wait_for(lambda: self.browser.find_element_by_tag_name("button")).click()
 
         # She is taken back to home page with her entry shown on top
@@ -46,7 +46,7 @@ class HomePageTest(StaticLiveServerTestCase):
         # She enters another entry and it appears on top of it
         wait_for(lambda: self.browser.find_element_by_link_text("Add")).click()
         input_box = wait_for(lambda: self.browser.find_element_by_id("id_text"))
-        input_box.send_keys(10 * "text2")
+        input_box.send_keys(10 * f'{10 * "text2"}\n')
         wait_for(lambda: self.browser.find_element_by_tag_name("button")).click()
         wait_for(
             lambda: self.assertEqual(

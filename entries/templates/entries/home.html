@@ -6,13 +6,20 @@ Home - Diary
 
 {% block content %}
 <a href="{% url 'entries:add' %}">Add</a>
+
+{% regroup entries by created.date as days_entry %}
 <ul>
-    {% for entry in entries %}
-    <li id='id_entry'>
-        {{ entry.text }}
-        Created at: {{ entry.created }}
-        Modified at: {{ entry.modified }}
-    </li>
+    {% for day in days_entry %}
+    <li>{{ day.grouper }}</li>
+    <ul>
+        {% for entry in day.list %}
+        <li id='id_entry'>
+            {{ entry.created.time }}
+            <br>
+            {{ entry.text|linebreaksbr }}
+        </li>
+        {% endfor %}
+    </ul>
     {% endfor %}
 </ul>
 

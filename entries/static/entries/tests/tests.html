@@ -39,11 +39,11 @@
     <script>
         QUnit.test("should toggle visibility of inner levels", function (assert) {
             window.Entries.initialize();
-            assert.equal($('.box').siblings('ul').is(':visible'), true);
-            $('.box').click();
-            assert.equal($('.box').siblings('ul').is(':visible'), false);
-            $('.box').click();
-            assert.equal($('.box').siblings('ul').is(':visible'), true);
+            assert.equal($('#list-2-0').is(':visible'), true);
+            $('#box-2-0').click();
+            assert.equal($('#list-2-0').is(':visible'), false);
+            $('#box-2-0').click();
+            assert.equal($('#list-2-0').is(':visible'), true);
         });
 
         QUnit.test("should only toggle its own sibling list", function (assert) {

@@ -1,14 +1,6 @@
 * {
   box-sizing: border-box; }
 
-li#id-entry {
-  padding: 10px; }
-
-ul {
-  list-style: none; }
-  ul .box {
-    cursor: pointer; }
-
 main {
   position: relative; }
   main ul {
@@ -17,6 +9,18 @@ main {
     padding-left: 32px; }
     main ul li {
       position: relative; }
+    main ul .entry {
+      padding: 15px;
+      border: 1px solid;
+      width: max-content; }
+    main ul .box {
+      cursor: pointer;
+      display: block;
+      border: 1px solid;
+      padding: 15px;
+      width: max-content; }
+    main ul .box:hover {
+      background-color: #ccc; }
     main ul li::before {
       content: "";
       position: absolute;

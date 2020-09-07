@@ -25,10 +25,12 @@ Home - Diary
                             <span class="box">{{ day_entry.grouper }}<small> - (Day)</small></span>
                             <ul>
                                 {% for entry in day_entry.list %}
-                                <li id='id-entry'>
-                                    {{ entry.created.time }}
-                                    <br>
-                                    {{ entry.text|linebreaksbr }}
+                                <li>
+                                    <div class='entry'>
+                                        {{ entry.created.time }}
+                                        <br>
+                                        {{ entry.text|linebreaksbr }}
+                                    </div>
                                 </li>
                                 {% endfor %}
                             </ul>

@@ -8,38 +8,40 @@ Home - Diary
 <a href="{% url 'entries:add' %}">Add</a>
 
 {% regroup entries by created.date.year as years_entry %}
-<ul>
-    {% for year_entry in years_entry %}
-    <li>
-        <span class="box">{{ year_entry.grouper }}</span>
-        {% regroup year_entry.list by created.date.month as months_entry %}
-        <ul>
-            {% for month_entry in months_entry %}
-            <li>
-                <span class="box">{{ month_entry.grouper }}</span>
-                {% regroup month_entry.list by created.date.day as days_entry %}
-                <ul>
-                    {% for day_entry in days_entry %}
-                    <li>
-                        <span class="box">{{ day_entry.grouper }}</span>
-                        <ul>
-                            {% for entry in day_entry.list %}
-                            <li id='id-entry'>
-                                {{ entry.created.time }}
-                                <br>
-                                {{ entry.text|linebreaksbr }}
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </li>
-            {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-</ul>
+<main>
+    <ul>
+        {% for year_entry in years_entry %}
+        <li>
+            <span class="box">{{ year_entry.grouper }}<small> - (Year)</small></span>
+            {% regroup year_entry.list by created.date.month as months_entry %}
+            <ul>
+                {% for month_entry in months_entry %}
+                <li>
+                    <span class="box">{{ month_entry.grouper }}<small> - (Month)</small></span>
+                    {% regroup month_entry.list by created.date.day as days_entry %}
+                    <ul>
+                        {% for day_entry in days_entry %}
+                        <li>
+                            <span class="box">{{ day_entry.grouper }}<small> - (Day)</small></span>
+                            <ul>
+                                {% for entry in day_entry.list %}
+                                <li id='id-entry'>
+                                    {{ entry.created.time }}
+                                    <br>
+                                    {{ entry.text|linebreaksbr }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</main>
 
 <script src="../../static/entries/jquery-3.5.1.js"></script>
 <script src="../../static/entries/list.js"></script>

@@ -14,16 +14,16 @@
     <div id="qunit-fixture">
         <ul id="list-0-0">
             <li>
-                <span class="box" id="box-1-0">Level 1</span>
+                <span class="caret" id="caret-1-0">Level 1</span>
                 <ul id="list-1-0">
                     <li>
-                        <span class="box" id="box-2-0">Level 2</span>
+                        <span class="caret" id="caret-2-0">Level 2</span>
                         <ul id="list-2-0">
                             <li>Hi, there</li>
                         </ul>
                     </li>
                     <li>
-                        <span class="box" id="box-2-1">Level 2</span>
+                        <span class="caret" id="caret-2-1">Level 2</span>
                         <ul id="list-2-1">
                             <li>Hi, there</li>
                         </ul>
@@ -40,9 +40,9 @@
         QUnit.test("should toggle visibility of inner levels", function (assert) {
             window.Entries.initialize();
             assert.equal($('#list-2-0').is(':visible'), true);
-            $('#box-2-0').click();
+            $('#caret-2-0').click();
             assert.equal($('#list-2-0').is(':visible'), false);
-            $('#box-2-0').click();
+            $('#caret-2-0').click();
             assert.equal($('#list-2-0').is(':visible'), true);
         });
 
@@ -51,11 +51,20 @@
             assert.equal($('#list-1-0').is(':visible'), true);
             assert.equal($('#list-2-0').is(':visible'), true);
             assert.equal($('#list-2-1').is(':visible'), true);
-            $('#box-2-0').click();
+            $('#caret-2-0').click();
             assert.equal($('#list-1-0').is(':visible'), true);
             assert.equal($('#list-2-0').is(':visible'), false);
             assert.equal($('#list-2-1').is(':visible'), true);
-        })
+        });
+
+        QUnit.test("should toggle caret-down class on click", function (assert) {
+            window.Entries.initialize();
+            assert.equal($('#caret-2-0').hasClass('caret-down'), false);
+            $('#caret-2-0').click();
+            assert.equal($('#caret-2-0').hasClass('caret-down'), true);
+            $('#caret-2-0').click();
+            assert.equal($('#caret-2-0').hasClass('caret-down'), false);
+        });
     </script>
 
 </body>

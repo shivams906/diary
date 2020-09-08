@@ -1,43 +1,28 @@
 * {
   box-sizing: border-box; }
 
-main {
-  position: relative; }
-  main ul {
+main ul {
+  list-style: none; }
+  main ul li {
     position: relative;
-    list-style: none;
-    padding-left: 32px; }
-    main ul li {
-      position: relative; }
-    main ul .entry {
-      padding: 15px;
-      border: 1px solid;
-      width: max-content; }
-    main ul .box {
-      cursor: pointer;
-      display: block;
-      border: 1px solid;
-      padding: 15px;
-      width: max-content; }
-    main ul .box:hover {
-      background-color: #ccc; }
-    main ul li::before {
-      content: "";
-      position: absolute;
-      left: -12px;
-      border-top: 1px solid #000;
-      top: 9px;
-      width: 8px;
-      height: 0; }
-    main ul li::after {
-      content: "";
-      position: absolute;
-      left: -12px;
-      border-left: 1px solid #000;
-      height: 100%;
-      width: 0px;
-      top: 2px; }
-    main ul li:last-child::after {
-      height: 8px; }
+    margin: 15px; }
+  main ul .entry {
+    padding: 15px;
+    border: 1px solid;
+    width: max-content; }
+  main ul .caret {
+    cursor: pointer;
+    display: block;
+    border: 1px solid;
+    padding: 15px;
+    width: max-content; }
+  main ul .caret:hover {
+    background-color: #ccc; }
+  main ul .caret::before {
+    content: "\25B6";
+    position: absolute;
+    left: -20px; }
+  main ul .caret-down:before {
+    transform: rotate(90deg); }
 
 /*# sourceMappingURL=style.css.map */

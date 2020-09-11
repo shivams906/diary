@@ -1,28 +1,53 @@
+@charset "UTF-8";
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
+
+header {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+header * {
+  align-self: center;
+}
+header h1 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  justify-self: center;
+}
+header div {
+  justify-self: end;
+}
 
 main ul {
-  list-style: none; }
-  main ul li {
-    position: relative;
-    margin: 15px; }
-  main ul .entry {
-    padding: 15px;
-    border: 1px solid;
-    width: max-content; }
-  main ul .caret {
-    cursor: pointer;
-    display: block;
-    border: 1px solid;
-    padding: 15px;
-    width: max-content; }
-  main ul .caret:hover {
-    background-color: #ccc; }
-  main ul .caret::before {
-    content: "\25B6";
-    position: absolute;
-    left: -20px; }
-  main ul .caret-down:before {
-    transform: rotate(90deg); }
+  list-style: none;
+}
+main ul li {
+  position: relative;
+  margin: 15px;
+}
+main ul .entry {
+  padding: 15px;
+  border: 1px solid;
+  width: max-content;
+}
+main ul .caret {
+  cursor: pointer;
+  display: block;
+  border: 1px solid;
+  padding: 15px;
+  width: max-content;
+}
+main ul .caret:hover {
+  background-color: #ccc;
+}
+main ul .caret::before {
+  content: "▶";
+  position: absolute;
+  left: -20px;
+}
+main ul .caret-down:before {
+  transform: rotate(90deg);
+}
 
 /*# sourceMappingURL=style.css.map */

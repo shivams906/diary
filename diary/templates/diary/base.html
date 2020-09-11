@@ -16,8 +16,10 @@
         {% endif %}
         <h1>Diary</h1>
         {% if user.is_authenticated %}
-        {{ user.username }}
-        <a href="{% url 'logout' %}">Logout</a>
+        <div>
+            {{ user.username }}
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
         {% endif %}
     </header>
     {% block content %}

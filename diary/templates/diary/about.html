@@ -1,0 +1,10 @@
+{% extends 'diary/base.html' %}
+
+{% block title %}
+About - Diary
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'login' %}">Login</a>
+<a href="{% url 'signup' %}">Sign Up</a>
+{% endblock %}

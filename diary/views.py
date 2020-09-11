@@ -4,8 +4,11 @@ from diary.models import Entry
 
 
 def home(request):
-    entries = Entry.objects.all()
-    return render(request, "diary/home.html", {"entries": entries})
+    if request.user.is_authenticated:
+        entries = Entry.objects.all()
+        return render(request, "diary/home.html", {"entries": entries})
+    else:
+        return render(request, "diary/about.html")
 
 
 def add(request):

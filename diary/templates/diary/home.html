@@ -5,7 +5,6 @@ Home - Diary
 {% endblock %}
 
 {% block content %}
-<a href="{% url 'diary:add' %}">Add</a>
 
 {% regroup entries by created.date.year as years_entry %}
 <main>

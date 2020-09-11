@@ -1,6 +1,6 @@
 from django.test import TestCase
-from entries.forms import EntryForm
-from entries.models import Entry
+from diary.forms import EntryForm
+from diary.models import Entry
 
 
 class EntryFormTest(TestCase):

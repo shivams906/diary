@@ -1,4 +1,4 @@
-from entries.models import Entry
+from diary.models import Entry
 from django import forms
 
 

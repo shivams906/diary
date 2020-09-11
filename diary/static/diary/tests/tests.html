@@ -38,7 +38,7 @@
 
     <script>
         QUnit.test("should toggle visibility of inner levels", function (assert) {
-            window.Entries.initialize();
+            window.diary.initialize();
             assert.equal($('#list-2-0').is(':visible'), true);
             $('#caret-2-0').click();
             assert.equal($('#list-2-0').is(':visible'), false);
@@ -47,7 +47,7 @@
         });
 
         QUnit.test("should only toggle its own sibling list", function (assert) {
-            window.Entries.initialize();
+            window.diary.initialize();
             assert.equal($('#list-1-0').is(':visible'), true);
             assert.equal($('#list-2-0').is(':visible'), true);
             assert.equal($('#list-2-1').is(':visible'), true);
@@ -58,7 +58,7 @@
         });
 
         QUnit.test("should toggle caret-down class on click", function (assert) {
-            window.Entries.initialize();
+            window.diary.initialize();
             assert.equal($('#caret-2-0').hasClass('caret-down'), false);
             $('#caret-2-0').click();
             assert.equal($('#caret-2-0').hasClass('caret-down'), true);

@@ -18,7 +18,7 @@ class HomePageTest(StaticLiveServerTestCase):
 
     def test_simple_diary_entry(self):
         # Edith goes to the home page
-        self.browser.get(f"{self.live_server_url}/entries/")
+        self.browser.get(f"{self.live_server_url}/diary/")
 
         # She sees 'Diary' in the title
         self.assertIn("Diary", self.browser.title)
@@ -36,12 +36,12 @@ class HomePageTest(StaticLiveServerTestCase):
         # She is taken back to home page with her entry shown on top
         wait_for(
             lambda: self.assertEqual(
-                self.browser.current_url, f"{self.live_server_url}/entries/"
+                self.browser.current_url, f"{self.live_server_url}/diary/"
             )
         )
 
-        entries = wait_for(lambda: self.browser.find_elements_by_id("id-entry"))
-        self.assertIn("text", entries[0].text)
+        diary = wait_for(lambda: self.browser.find_elements_by_class_name("entry"))
+        self.assertIn("text", diary[0].text)
 
         # She enters another entry and it appears on top of it
         wait_for(lambda: self.browser.find_element_by_link_text("Add")).click()
@@ -50,12 +50,12 @@ class HomePageTest(StaticLiveServerTestCase):
         wait_for(lambda: self.browser.find_element_by_tag_name("button")).click()
         wait_for(
             lambda: self.assertEqual(
-                self.browser.current_url, f"{self.live_server_url}/entries/"
+                self.browser.current_url, f"{self.live_server_url}/diary/"
             )
         )
-        entries = wait_for(lambda: self.browser.find_elements_by_id("id-entry"))
-        self.assertIn("text2", entries[0].text)
-        self.assertIn("text", entries[1].text)
+        diary = wait_for(lambda: self.browser.find_elements_by_class_name("entry"))
+        self.assertIn("text2", diary[0].text)
+        self.assertIn("text", diary[1].text)
 
 
 def wait_for(function):

@@ -1,11 +1,11 @@
-{% extends 'entries/base.html' %}
+{% extends 'diary/base.html' %}
 
 {% block title %}
 Home - Diary
 {% endblock %}
 
 {% block content %}
-<a href="{% url 'entries:add' %}">Add</a>
+<a href="{% url 'diary:add' %}">Add</a>
 
 {% regroup entries by created.date.year as years_entry %}
 <main>
@@ -45,7 +45,7 @@ Home - Diary
     </ul>
 </main>
 
-<script src="../../static/entries/jquery-3.5.1.js"></script>
-<script src="../../static/entries/list.js"></script>
+<script src="../../static/diary/jquery-3.5.1.js"></script>
+<script src="../../static/diary/list.js"></script>
 
 {% endblock %}

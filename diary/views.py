@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from entries.forms import EntryForm
-from entries.models import Entry
+from diary.forms import EntryForm
+from diary.models import Entry
 
 
 def home(request):
     entries = Entry.objects.all()
-    return render(request, "entries/home.html", {"entries": entries})
+    return render(request, "diary/home.html", {"entries": entries})
 
 
 def add(request):
@@ -14,5 +14,5 @@ def add(request):
         form = EntryForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("entries:home")
-    return render(request, "entries/add.html", {"form": form})
+            return redirect("diary:home")
+    return render(request, "diary/add.html", {"form": form})

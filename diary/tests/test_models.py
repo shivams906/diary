@@ -1,5 +1,5 @@
 from django.test import TestCase
-from entries.models import Entry
+from diary.models import Entry
 
 
 class EntryTest(TestCase):
@@ -14,7 +14,7 @@ class EntryTest(TestCase):
         entry.save()
         self.assertLess(modified_date, entry.modified)
 
-    def test_saves_entries_ordered_ny_date(self):
+    def test_saves_diary_ordered_ny_date(self):
         entry1 = Entry.objects.create(text=10 * "text")
         entry2 = Entry.objects.create(text=10 * "text")
         self.assertEqual(Entry.objects.first(), entry2)

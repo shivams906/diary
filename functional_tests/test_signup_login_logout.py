@@ -1,14 +1,7 @@
-from selenium import webdriver
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-from selenium.common.exceptions import WebDriverException
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-import time
-import random
-
-MAX_WAIT = 5
+from .base import *
 
 
-class RegistrationTest(StaticLiveServerTestCase):
+class RegistrationTest(FunctionalTest):
     def setUp(self):
         self.browser = webdriver.Firefox(
             firefox_binary=FirefoxBinary("/usr/lib/firefox/firefox")
@@ -75,14 +68,3 @@ class RegistrationTest(StaticLiveServerTestCase):
         wait_for(lambda: self.assertIn("Home", self.browser.title))
         content = wait_for(lambda: self.browser.find_element_by_tag_name("body").text)
         self.assertIn("edith123", content)
-
-
-def wait_for(function):
-    start_time = time.time()
-    while True:
-        try:
-            return function()
-        except WebDriverException as exception:
-            if time.time() - start_time > MAX_WAIT:
-                raise exception
-            time.sleep(0.5)

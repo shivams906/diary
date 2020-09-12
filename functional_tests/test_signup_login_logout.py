@@ -14,8 +14,8 @@ class RegistrationTest(StaticLiveServerTestCase):
             firefox_binary=FirefoxBinary("/usr/lib/firefox/firefox")
         )
 
-    # def tearDown(self):
-    #     self.browser.quit()
+    def tearDown(self):
+        self.browser.quit()
 
     def test_simple_diary_entry(self):
         # Edith goes to the home page and is redirected to the about page
@@ -32,14 +32,11 @@ class RegistrationTest(StaticLiveServerTestCase):
         wait_for(lambda: self.browser.find_element_by_id("id_username")).send_keys(
             "edith123"
         )
-        password = "".join(
-            random.SystemRandom().choices("abcdefghijklmnopqrstuvwxyz0123456789", k=30)
-        )
         wait_for(lambda: self.browser.find_element_by_id("id_password1")).send_keys(
-            password
+            "top_secret"
         )
         wait_for(lambda: self.browser.find_element_by_id("id_password2")).send_keys(
-            password
+            "top_secret"
         )
         wait_for(lambda: self.browser.find_element_by_id("id_sign_up")).click()
 
@@ -51,7 +48,7 @@ class RegistrationTest(StaticLiveServerTestCase):
             "edith123"
         )
         wait_for(lambda: self.browser.find_element_by_id("id_password")).send_keys(
-            password
+            "top_secret"
         )
         wait_for(lambda: self.browser.find_element_by_id("id_login")).click()
 
@@ -72,7 +69,7 @@ class RegistrationTest(StaticLiveServerTestCase):
             "edith123"
         )
         wait_for(lambda: self.browser.find_element_by_id("id_password")).send_keys(
-            password
+            "top_secret"
         )
         wait_for(lambda: self.browser.find_element_by_id("id_login")).click()
         wait_for(lambda: self.assertIn("Home", self.browser.title))

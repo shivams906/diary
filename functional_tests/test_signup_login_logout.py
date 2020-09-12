@@ -66,5 +66,5 @@ class RegistrationTest(FunctionalTest):
         )
         wait_for(lambda: self.browser.find_element_by_id("id_login")).click()
         wait_for(lambda: self.assertIn("Home", self.browser.title))
-        content = wait_for(lambda: self.browser.find_element_by_tag_name("body").text)
-        self.assertIn("edith123", content)
+        body = wait_for(lambda: self.browser.find_element_by_tag_name("body"))
+        self.assertIn("edith123", body.text)

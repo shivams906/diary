@@ -11,7 +11,8 @@ class HomePageTest(FunctionalTest):
         self.browser.quit()
 
     def test_simple_diary_entry(self):
-        self.login_user(username="edith123", password="top_secret")
+        User.objects.create_user(username="edith", password="top_secret")
+        self.login_user(username="edith", password="top_secret")
 
         # Edith goes to the home page
         self.browser.get(f"{self.live_server_url}/diary/")
@@ -26,7 +27,7 @@ class HomePageTest(FunctionalTest):
         input_box = wait_for(lambda: self.browser.find_element_by_id("id_text"))
 
         # She enters an entry and clicks the add button
-        input_box.send_keys(10 * f'{10 * "text"}\n')
+        input_box.send_keys(10 * f'{10 * "entry1"}\n')
         wait_for(lambda: self.browser.find_element_by_tag_name("button")).click()
 
         # She is taken back to home page with her entry shown on top
@@ -37,12 +38,12 @@ class HomePageTest(FunctionalTest):
         )
 
         diary = wait_for(lambda: self.browser.find_elements_by_class_name("entry"))
-        self.assertIn("text", diary[0].text)
+        self.assertIn("entry1", diary[0].text)
 
         # She enters another entry and it appears on top of it
         wait_for(lambda: self.browser.find_element_by_link_text("Add")).click()
         input_box = wait_for(lambda: self.browser.find_element_by_id("id_text"))
-        input_box.send_keys(10 * f'{10 * "text2"}\n')
+        input_box.send_keys(10 * f'{10 * "entry2"}\n')
         wait_for(lambda: self.browser.find_element_by_tag_name("button")).click()
         wait_for(
             lambda: self.assertEqual(
@@ -50,16 +51,5 @@ class HomePageTest(FunctionalTest):
             )
         )
         diary = wait_for(lambda: self.browser.find_elements_by_class_name("entry"))
-        self.assertIn("text2", diary[0].text)
-        self.assertIn("text", diary[1].text)
-
-
-def wait_for(function):
-    start_time = time.time()
-    while True:
-        try:
-            return function()
-        except WebDriverException as exception:
-            if time.time() - start_time > MAX_WAIT:
-                raise exception
-            time.sleep(0.5)
+        self.assertIn("entry2", diary[0].text)
+        self.assertIn("entry1", diary[1].text)

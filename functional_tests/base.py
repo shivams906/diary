@@ -23,7 +23,6 @@ class FunctionalTest(StaticLiveServerTestCase):
         self.browser.quit()
 
     def login_user(self, username, password):
-        User.objects.create_user(username=username, password=password)
         self.browser.get(f"{self.live_server_url}/accounts/login/")
         wait_for(lambda: self.assertIn("Login", self.browser.title))
         wait_for(lambda: self.browser.find_element_by_id("id_username")).send_keys(

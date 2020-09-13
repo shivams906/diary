@@ -50,4 +50,19 @@ main ul .caret-down:before {
   transform: rotate(90deg);
 }
 
+form#add {
+  display: grid;
+  margin: 0 10%;
+}
+form#add textarea {
+  height: 500px;
+  font-size: x-large;
+}
+form#add button {
+  background-color: white;
+  border: 1px solid;
+  cursor: pointer;
+  padding: 15px;
+}
+
 /*# sourceMappingURL=style.css.map */

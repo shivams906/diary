@@ -1,4 +1,5 @@
 {% extends 'diary/base.html' %}
+{% load tz %}
 
 {% block title %}
 Home - Diary
@@ -6,39 +7,24 @@ Home - Diary
 
 {% block content %}
 
-{% regroup entries by created.date.year as years_entry %}
+{% get_current_timezone as TIME_ZONE %}
+<form id="timezone-form" action="{% url 'diary:set-timezone' %}" method="POST">
+    {% csrf_token %}
+    <label for="timezone">Time zone:</label>
+    <select name="timezone">
+        {% for tz in timezones %}
+        <option value="{{ tz }}" {% if tz == TIME_ZONE %} selected{% endif %}>{{ tz }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Set">
+</form>
+
 <main>
     <ul>
-        {% for year_entry in years_entry %}
+        {% for entry in entries %}
         <li>
-            <span class="caret caret-down">{{ year_entry.grouper }}<small> - (Year)</small></span>
-            {% regroup year_entry.list by created.date.month as months_entry %}
-            <ul>
-                {% for month_entry in months_entry %}
-                <li>
-                    <span class="caret caret-down">{{ month_entry.grouper }}<small> - (Month)</small></span>
-                    {% regroup month_entry.list by created.date.day as days_entry %}
-                    <ul>
-                        {% for day_entry in days_entry %}
-                        <li>
-                            <span class="caret caret-down">{{ day_entry.grouper }}<small> - (Day)</small></span>
-                            <ul>
-                                {% for entry in day_entry.list %}
-                                <li>
-                                    <div class='entry'>
-                                        {{ entry.created.time }}
-                                        <br>
-                                        {{ entry.text|linebreaksbr }}
-                                    </div>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-                {% endfor %}
-            </ul>
+            <strong>{{ entry.created }}</strong>
+            <p>{{ entry.text|linebreaksbr }}</p>
         </li>
         {% endfor %}
     </ul>

@@ -22,7 +22,7 @@ Home - Diary
 <main>
     <ul>
         {% for entry in entries %}
-        <li>
+        <li class="entry">
             <strong>{{ entry.created }}</strong>
             <p>{{ entry.text|linebreaksbr }}</p>
         </li>

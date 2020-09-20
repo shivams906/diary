@@ -73,6 +73,8 @@ class AddPageTest(TestCase):
         self.assertEqual(Entry.objects.count(), 1)
 
     def test_POST_does_not_create_blank_diary(self):
+        user = User.objects.create_user(username="user", password="top_secret")
+        self.client.force_login(user)
         self.client.post("/diary/add/", {"text": ""})
         self.assertEqual(Entry.objects.count(), 0)
 

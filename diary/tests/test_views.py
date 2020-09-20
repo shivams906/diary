@@ -46,13 +46,17 @@ class HomePageTest(TestCase):
 
 
 class AddPageTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user = User.objects.create_user(username="jacob", password="top_secret")
+
     def test_add_url_resolves_to_correct_view_function(self):
+        self.client.force_login(self.user)
         found = resolve("/diary/add/")
         self.assertEqual(found.func, add)
 
     def test_add_view_uses_correct_template(self):
-        user = User.objects.create_user(username="jacob", password="top_secret")
-        self.client.force_login(user)
+        self.client.force_login(self.user)
         response = self.client.get("/diary/add/")
         self.assertTemplateUsed(response, "diary/add.html")
 
@@ -61,32 +65,27 @@ class AddPageTest(TestCase):
         self.assertRedirects(response, "/accounts/login/?next=/diary/add/")
 
     def test_add_view_uses_correct_form(self):
-        user = User.objects.create_user(username="user", password="top_secret")
-        self.client.force_login(user)
+        self.client.force_login(self.user)
         response = self.client.get("/diary/add/")
         self.assertIsInstance(response.context["form"], EntryForm)
 
     def test_POST_creates_an_entry(self):
-        user = User.objects.create_user(username="user", password="top_secret")
-        self.client.force_login(user)
+        self.client.force_login(self.user)
         self.client.post("/diary/add/", {"text": 10 * "text"})
         self.assertEqual(Entry.objects.count(), 1)
 
     def test_POST_does_not_create_blank_diary(self):
-        user = User.objects.create_user(username="user", password="top_secret")
-        self.client.force_login(user)
+        self.client.force_login(self.user)
         self.client.post("/diary/add/", {"text": ""})
         self.assertEqual(Entry.objects.count(), 0)
 
     def test_valid_POST_redirects_to_home_page(self):
-        user = User.objects.create_user(username="user", password="top_secret")
-        self.client.force_login(user)
+        self.client.force_login(self.user)
         response = self.client.post("/diary/add/", {"text": 10 * "text"})
         self.assertRedirects(response, "/diary/")
 
     def test_current_user_is_saved_as_owner(self):
-        user = User.objects.create_user(username="user", password="top_secret")
-        self.client.force_login(user)
+        self.client.force_login(self.user)
         self.client.post("/diary/add/", {"text": 10 * "text"})
         entry = Entry.objects.first()
-        self.assertEqual(entry.owner, user)
+        self.assertEqual(entry.owner, self.user)

@@ -18,13 +18,13 @@ class HomePageTest(TestCase):
         self.assertTemplateUsed(response, "diary/about.html")
 
     def test_authenticated_users_are_shown_home_template(self):
-        user = User.objects.create_user(username="user", password="top_secret")
+        user = User.objects.create_user(username="user", password="password123")
         self.client.force_login(user)
         response = self.client.get("/diary/")
         self.assertTemplateUsed(response, "diary/home.html")
 
     def test_home_view_shows_diary(self):
-        user = User.objects.create_user(username="user", password="top_secret")
+        user = User.objects.create_user(username="user", password="password123")
         self.client.force_login(user)
         self.client.post("/diary/add/", {"text": 10 * "text"})
         response = self.client.get("/diary/")
@@ -32,8 +32,8 @@ class HomePageTest(TestCase):
         self.assertIn(10 * "text", data)
 
     def test_only_current_users_entries_are_displayed(self):
-        user1 = User.objects.create_user(username="user1", password="top_secret")
-        user2 = User.objects.create_user(username="user2", password="top_secret")
+        user1 = User.objects.create_user(username="user1", password="password123")
+        user2 = User.objects.create_user(username="user2", password="password123")
         entry1 = Entry.objects.create(text="entry1", owner=user1)
         entry2 = Entry.objects.create(text="entry2", owner=user2)
 
@@ -48,7 +48,7 @@ class HomePageTest(TestCase):
 class AddPageTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.user = User.objects.create_user(username="jacob", password="top_secret")
+        cls.user = User.objects.create_user(username="user", password="password123")
 
     def test_add_url_resolves_to_correct_view_function(self):
         self.client.force_login(self.user)

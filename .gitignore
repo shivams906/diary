@@ -9,3 +9,5 @@ scss
 .sass-cache
 .idea
 .env
+.coverage
+htmlcov

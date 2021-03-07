@@ -25,6 +25,12 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+- Set Debug Value
+
+```
+export DEBUG=true
+```
+
 - Set up the database
 
 ```
